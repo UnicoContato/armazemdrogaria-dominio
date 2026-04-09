@@ -1,61 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    document.getElementById('ano-atual').textContent = new Date().getFullYear();
-
-    const navbar = document.getElementById('navbar');
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        
-        if (currentScrollY > 80) {
-            if (currentScrollY > lastScrollY) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
+    // Scroll Animation
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
             }
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollY = currentScrollY;
-    }, { passive: true });
-
-    const btnMenu = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const menuLinks = menu.querySelectorAll('a');
-
-    btnMenu.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
-
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menu.classList.add('hidden');
         });
-    });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
-    const modal = document.getElementById('modal-privacidade');
-    const openModalBtn = document.getElementById('open-modal');
-    const closeModalBtns = [document.getElementById('close-modal'), document.getElementById('close-modal-btn')];
-    const modalBackdrop = document.getElementById('modal-backdrop');
+    // Header Scroll
+    const header = document.getElementById('main-header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('shadow-md');
+            else header.classList.remove('shadow-md');
+        });
+    }
+});
 
-    const openModal = (e) => {
-        e.preventDefault();
+// --- MODAL LOGIC ---
+const modal = document.getElementById('privacy-modal');
+const openBtn = document.getElementById('open-privacy');
+const closeBtns = document.querySelectorAll('#close-modal, #close-modal-btn');
+
+function toggleModal(show) {
+    if (!modal) return;
+
+    if (show) {
         modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+        }, 10);
         document.body.style.overflow = 'hidden';
-    };
+    } else {
+        modal.classList.add('opacity-0');
+        modal.querySelector('div').classList.remove('scale-100');
+        modal.querySelector('div').classList.add('scale-95');
+        document.body.style.overflow = '';
 
-    const closeModal = () => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    };
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+}
 
-    openModalBtn.addEventListener('click', openModal);
-    
-    closeModalBtns.forEach(btn => {
-        btn.addEventListener('click', closeModal);
+if (openBtn) {
+    openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleModal(true);
     });
+}
 
-    modalBackdrop.addEventListener('click', closeModal);
+if (closeBtns) {
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', () => toggleModal(false));
+    });
+}
+
+if (modal) {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            toggleModal(false);
+        }
+    });
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        toggleModal(false);
+    }
 });

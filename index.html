@@ -1,332 +1,426 @@
+Entendi perfeitamente! Para deixar o layout exatamente como na sua imagem, o "Card Preto" precisava sair da coluna da direita e ir para o fundo da seção inteira, ocupando a largura abaixo das duas colunas e centralizado. 
+
+Também retirei o efeito de "rolagem fixa" (sticky) da imagem, para que a página flua normalmente até chegar no card no final.
+
+Aqui está o `index.html` atualizado com o layout definitivo:
+
+```html
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-br" class="scroll-smooth">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Armazém Drogaria - Sua Saúde em 1º Lugar</title>
-    <meta name="description" content="A Armazém Drogaria é referência em atendimento clínico, medicamentos, perfumaria e cuidados pessoais em Nova Ponte-MG.">
-    <meta property="og:title" content="Armazém Drogaria">
-    <meta property="og:description" content="Sua Saúde em 1º Lugar. Medicamentos, perfumaria, serviços clínicos e muito mais.">
-    <meta property="og:image" content="https://armazemdrogaria.com.br/img/1.jpeg">
-    <meta property="og:url" content="https://armazemdrogaria.com.br">
-    <meta property="og:type" content="website">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Armazém Drogaria</title>
+    <meta name="facebook-domain-verification" content="hpi5jlys6w7vwbv45d65vmw01cbl39" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', "sans-serif"] },
                     colors: {
-                        primary: '#E60000',
-                        secondary: '#0033A0',
+                        brand: {
+                            red: "#E30613" /* Vermelho Logo Armazém Drogaria */,
+                            cyan: "#00A8CC" /* Turquesa da Fachada */,
+                            dark: "#0F172A",
+                            light: "#F0FDFA",
+                        },
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
+                    boxShadow: {
+                        glow: "0 0 20px rgba(0, 168, 204, 0.4)",
+                    },
+                },
+            },
+        };
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
 </head>
-<body class="font-sans text-gray-800 bg-gray-50 antialiased overflow-x-hidden">
 
-    <nav id="navbar" class="fixed w-full z-50 transition-transform duration-300 bg-white/70 backdrop-blur-lg border-b border-gray-200/50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#inicio" class="text-2xl font-bold text-secondary tracking-tight">
-                        ARMAZÉM <span class="text-primary">DROGARIA</span>
-                    </a>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#inicio" class="text-gray-700 hover:text-primary transition-colors font-semibold">Início</a>
-                    <a href="#sobre" class="text-gray-700 hover:text-primary transition-colors font-semibold">Sobre Nós</a>
-                    <a href="#servicos" class="text-gray-700 hover:text-primary transition-colors font-semibold">Serviços</a>
-                    <a href="#galeria" class="text-gray-700 hover:text-primary transition-colors font-semibold">Galeria</a>
-                    <a href="#contato" class="text-gray-700 hover:text-primary transition-colors font-semibold">Contato</a>
-                    
-                    <a href="https://wa.me/553433562100" target="_blank" class="flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-bold transition-transform transform hover:scale-105 shadow-lg">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                        <span>Peça pelo WhatsApp</span>
-                    </a>
-                </div>
-
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none p-2">
-                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
-                </div>
+<body class="font-sans text-slate-600 antialiased bg-slate-50 selection:bg-brand-cyan selection:text-white">
+    <header id="main-header"
+        class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-100">
+        <div class="container mx-auto px-4 lg:px-8 py-0 flex justify-between items-center relative">
+            
+            <div class="flex items-center gap-2">
+                <img src="img/LogoArmazem.png" alt="Logo Armazém Drogaria" class="h-24 w-auto object-contain" />
             </div>
-        </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-xl absolute w-full">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#inicio" class="block px-3 py-3 text-base font-semibold text-gray-800 hover:bg-gray-50 rounded-md">Início</a>
-                <a href="#sobre" class="block px-3 py-3 text-base font-semibold text-gray-800 hover:bg-gray-50 rounded-md">Sobre Nós</a>
-                <a href="#servicos" class="block px-3 py-3 text-base font-semibold text-gray-800 hover:bg-gray-50 rounded-md">Serviços</a>
-                <a href="#galeria" class="block px-3 py-3 text-base font-semibold text-gray-800 hover:bg-gray-50 rounded-md">Galeria</a>
-                <a href="#contato" class="block px-3 py-3 text-base font-semibold text-gray-800 hover:bg-gray-50 rounded-md">Contato</a>
-                <a href="https://wa.me/553433562100" target="_blank" class="flex items-center justify-center space-x-2 w-full mt-4 bg-green-500 text-white px-4 py-3 rounded-md font-bold shadow-md">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                    <span>Faça seu Pedido</span>
-                </a>
+            <nav class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap items-center gap-8 bg-slate-100/50 px-6 py-2 rounded-full border border-slate-200/60 z-10">
+                <a href="#inicio" class="text-sm font-semibold text-slate-600 hover:text-brand-red transition">Início</a>
+                <a href="#unidades" class="text-sm font-semibold text-slate-600 hover:text-brand-red transition">Unidade</a>
+                <a href="#servicos" class="text-sm font-semibold text-slate-600 hover:text-brand-red transition">Serviços</a>
+                <a href="#atendimento" class="text-sm font-semibold text-slate-600 hover:text-brand-red transition">Contato</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-4">
             </div>
-        </div>
-    </nav>
 
-    <header id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-[url('img/1.jpeg')] bg-cover bg-center bg-no-repeat scale-105 transform origin-center animate-bg"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-black/60"></div>
-        
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">
-                Armazém <span class="text-primary">Drogaria</span>
-            </h1>
-            <p class="text-xl md:text-3xl text-gray-200 mb-10 font-light tracking-wide">
-                Cuidando de você! Sua saúde em 1º lugar.
-            </p>
-            <a href="https://wa.me/553433562100" target="_blank" class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-primary rounded-full hover:bg-red-700 hover:shadow-[0_0_20px_rgba(230,0,0,0.5)] focus:outline-none focus:ring-4 focus:ring-red-500/50">
-                <span class="mr-3 text-lg">Faça seu Pedido</span>
-                <svg class="w-6 h-6 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-            </a>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-            <a href="#sobre" class="text-white opacity-70 hover:opacity-100 transition-opacity">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-            </a>
+            <button id="mobile-menu-btn" class="lg:hidden text-brand-dark p-2">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
     </header>
 
-    <section id="sobre" class="py-24 bg-white relative">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-secondary mb-4 relative inline-block">
-                    Sobre Nós
-                    <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-full"></span>
-                </h2>
-            </div>
-            
-            <div class="bg-blue-50/50 rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-lg text-gray-700 leading-relaxed space-y-6">
-                <p>
-                    A Armazém Drogaria, localizada na Avenida Governador Valadares, nº 1465, em Nova Ponte-MG, nasceu com o propósito de cuidar da saúde e do bem-estar da nossa comunidade com responsabilidade, confiança e atendimento humanizado.
+    <section id="inicio" class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="img/2.jpeg" alt="Armazém Drogaria" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/70 to-slate-900/20"></div>
+        </div>
+
+        <div class="container mx-auto px-4 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="text-white space-y-8 fade-in-up">
+                <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+                    Sua saúde<br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-cyan">em
+                        primeiro lugar.</span>
+                </h1>
+
+                <p class="text-xl text-slate-300 font-light max-w-lg leading-relaxed">
+                    Armazém Drogaria. Com atendimento
+                    humanizado e a variedade que você precisa.
                 </p>
-                <p class="font-bold text-xl text-center text-primary py-4">
-                    Nosso compromisso é claro: SUA SAÚDE EM PRIMEIRO LUGAR.
-                </p>
-                <p>
-                    Mais do que uma farmácia, somos um espaço onde você encontra orientação profissional, qualidade e variedade em medicamentos, além de um mix completo de higiene, beleza, perfumaria, cuidados pessoais, produtos infantis e conveniência. Somos referência local em esmaltes, maquiagens e produtos capilares, acompanhando tendências e oferecendo diversidade com qualidade.
-                </p>
-                <p>
-                    A Armazém Drogaria conta com uma estrutura voltada à atenção farmacêutica e aos serviços clínicos, oferecendo:
-                </p>
-                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-4 list-disc marker:text-primary">
-                    <li>Aferição de pressão arterial</li>
-                    <li>Teste de glicemia</li>
-                    <li>Testes rápidos (como Dengue e Covid)</li>
-                    <li>Perfuração de lóbulo</li>
-                    <li>Orientação farmacêutica individualizada</li>
-                    <li>Aplicação de medicamentos por via intramuscular (IM) e intravenosa (EV)</li>
-                </ul>
-                <p>
-                    Os procedimentos são realizados por profissionais habilitados, com acompanhamento de farmacêuticos clínicos responsáveis, garantindo cuidado, segurança, rastreabilidade e cumprimento das normas sanitárias vigentes.
-                </p>
-                <p>
-                    Nosso atendimento em farmácia clínica é um dos grandes diferenciais da empresa. Contamos com os farmacêuticos clínicos Amanda e Lindomar, reconhecidos na cidade e região pela excelência técnica, compromisso com o paciente e acompanhamento individualizado. A atuação da equipe é pautada em responsabilidade profissional, escuta ativa e foco na promoção da saúde e no uso seguro de medicamentos — sempre colocando a saúde do cliente como prioridade.
-                </p>
-                <div class="bg-white border-l-4 border-secondary p-6 rounded-r-xl shadow-sm mt-8">
-                    <h3 class="text-xl font-bold text-secondary mb-3 flex items-center">
-                        <span class="text-2xl mr-2">🚗</span> Estrutura e Diferenciais
-                    </h3>
-                    <p>
-                        A Armazém Drogaria é a única da cidade com estacionamento privativo gratuito, proporcionando mais conforto, segurança e praticidade aos clientes. Estamos localizados em ponto estratégico, ao lado de supermercado e lotérica, facilitando o acesso da população.
-                    </p>
-                    <p class="mt-4">
-                        Somos um estabelecimento farmacêutico devidamente constituído e em funcionamento regular, situado na Avenida Governador Valadares, nº 1465, Centro, Nova Ponte – Minas Gerais, atuando no comércio varejista de medicamentos e produtos para saúde, higiene e bem-estar, em conformidade com as exigências legais e sanitárias aplicáveis.
-                    </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#unidades"
+                        class="px-8 py-4 bg-brand-red hover:bg-red-700 text-white rounded-xl font-bold transition shadow-glow transform hover:-translate-y-1 text-center">Nossa
+                        Loja</a>
+                    <a href="#servicos"
+                        class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-xl font-bold transition transform hover:-translate-y-1 text-center">Serviços</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="servicos" class="py-24 bg-gradient-to-b from-gray-50 to-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-secondary mb-4 relative inline-block">
-                    Nossos Serviços
-                    <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-full"></span>
+<section id="sobre" class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8">
+            
+            <div class="w-full mb-12 fade-in-up">
+                <h2 class="text-4xl font-extrabold text-brand-dark leading-none">
+                    Tradição e <span class="text-brand-cyan">Cuidado.</span>
                 </h2>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 
-                <div class="bg-white/60 backdrop-blur-xl border border-white/40 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center group">
-                    <div class="w-20 h-20 mx-auto bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                        <svg class="w-12 h-12 text-primary group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <g fill="currentColor"> <path fill="none" d="M0 0H24V24H0z" /> <path d="M19 2v2h-2v3c1.657 0 3 1.343 3 3v11c0 .552-.448 1-1 1H5c-.552 0-1-.448-1-1V10c0-1.657 1.343-3 3-3V4H5V2h14zm-2 7H7c-.552 0-1 .448-1 1v10h12V10c0-.552-.448-1-1-1zm-4 2v2h2v2h-2.001L13 17h-2l-.001-2H9v-2h2v-2h2zm2-7H9v3h6V4z" /> </g> </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-secondary mb-4">Medicamentos</h3>
-                    <p class="text-gray-600">Ampla variedade de medicamentos éticos e genéricos, garantindo procedência, qualidade e o tratamento ideal para sua saúde.</p>
-                </div>
-
-                <div class="bg-white/60 backdrop-blur-xl border border-white/40 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center group">
-                    <div class="w-20 h-20 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary transition-colors duration-300">
-                        <svg class="w-12 h-12 text-secondary group-hover:text-white transition-colors duration-300" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 442 442" xml:space="preserve"> <g> <path d="M231.5,50.5c0-5.79-4.71-10.5-10.5-10.5c-5.79,0-10.5,4.71-10.5,10.5S215.21,61,221,61C226.79,61,231.5,56.29,231.5,50.5z" /> <path d="M346,163.682h-60V122c0-5.522-4.478-10-10-10h-10V10c0-5.523-4.478-10-10-10h-70c-5.523,0-10,4.477-10,10v102h-10 c-5.523,0-10,4.478-10,10v41.682H96c-11.028,0-20,8.972-20,20V422c0,11.028,8.972,20,20,20h250c11.028,0,20-8.972,20-20V183.682 C366,172.653,357.028,163.682,346,163.682z M196,20h50v92h-50V20z M96,422V183.682h70c5.523,0,10-4.477,10-10V132h35v71.682h-85 c-5.523,0-10,4.478-10,10V392c0,5.522,4.477,10,10,10h190c5.522,0,10-4.478,10-10v-60.892c0-5.522-4.478-10-10-10s-10,4.478-10,10 V382H136V223.682h75V352c0,5.522,4.477,10,10,10c5.523,0,10-4.478,10-10V223.682h75V297c0,5.522,4.478,10,10,10s10-4.478,10-10 v-83.318c0-5.522-4.478-10-10-10h-85V132h35v41.682c0,5.523,4.478,10,10,10h70L346.002,422H96z" /> </g> </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-secondary mb-4">Perfumaria e Cosméticos</h3>
-                    <p class="text-gray-600">Mix completo de higiene, beleza, cuidados pessoais, além de ser referência local em esmaltes e maquiagens.</p>
-                </div>
-
-                <div class="bg-white/60 backdrop-blur-xl border border-white/40 p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-center group">
-                    <div class="w-20 h-20 mx-auto bg-green-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500 transition-colors duration-300">
-                        <svg class="w-12 h-12 text-green-600 group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="10" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/> <path d="M19 2C19 2 21 3.2 21 6C21 8.8 19 10 19 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/> <path d="M17 4C17 4 18 4.6 18 6C18 7.4 17 8 17 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/> <path d="M17.9975 18C18 17.8358 18 17.669 18 17.5C18 15.0147 14.4183 13 10 13C5.58172 13 2 15.0147 2 17.5C2 19.9853 2 22 10 22C12.231 22 13.8398 21.8433 15 21.5634" stroke="currentColor" stroke-width="1.em" stroke-linecap="round"/> </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-secondary mb-4">Atendimento Clínico</h3>
-                    <p class="text-gray-600">Aferição de pressão, testes rápidos, perfuração de lóbulo e aplicações com equipe farmacêutica qualificada.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="galeria" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-secondary mb-4 relative inline-block">
-                    Nossa Estrutura
-                    <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-full"></span>
-                </h2>
-                <p class="text-gray-600 mt-6 text-lg">Conheça nosso espaço pensado para o seu conforto.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="overflow-hidden rounded-2xl shadow-lg group aspect-w-4 aspect-h-3">
-                    <img src="img/1.jpeg" alt="Fachada da Armazém Drogaria" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg group aspect-w-4 aspect-h-3">
-                    <img src="img/2.jpeg" alt="Equipe Armazém Drogaria" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg group aspect-w-4 aspect-h-3">
-                    <img src="img/3.jpeg" alt="Interior da Loja - Perfumaria" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg group aspect-w-4 aspect-h-3">
-                    <img src="img/4.jpeg" alt="Detalhe da Fachada" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contato" class="py-24 bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-                
-                <div class="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 shadow-2xl flex flex-col justify-center">
-                    <h2 class="text-3xl font-extrabold text-white mb-8 border-b border-white/20 pb-4">
-                        Informações e Contato
-                    </h2>
+                <div class="fade-in-left space-y-10">
                     
-                    <div class="space-y-6 text-gray-300">
-                        <div>
-                            <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold">Razão Social</p>
-                            <p class="text-lg font-medium text-white">MARIANA CARDOSO DIAS LTDA</p>
+                    <div>
+                        <div class="space-y-6 text-lg text-slate-600 leading-relaxed text-justify">
+                            <p>
+                                A <strong>Armazém Drogaria</strong>, localizada na Avenida Governador Valadares, nº 1465, em Nova Ponte-MG, nasceu com o propósito de cuidar da saúde e do bem-estar da nossa comunidade com responsabilidade, confiança e atendimento humanizado.
+                            </p>
+                            <p class="font-bold text-brand-cyan text-xl border-l-4 border-brand-cyan pl-4 text-left">
+                                Nosso compromisso é claro: SUA SAÚDE EM PRIMEIRO LUGAR.
+                            </p>
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold">CNPJ</p>
-                            <p class="text-lg text-white">17.091.175/0001-54</p>
+                    </div>
+
+                    <div class="relative w-full">
+                        <img src="img/5.jpeg" class="rounded-3xl shadow-xl w-full h-auto object-cover" alt="Interior Armazém Drogaria" />
+                    </div>
+                </div>
+                
+                <div class="fade-in-right space-y-12">
+                    <div class="space-y-6 text-lg text-slate-600 leading-relaxed text-justify">
+                        <p>
+                            Mais do que uma farmácia, somos um espaço onde você encontra orientação profissional...
+                        </p>
+                        
+                        <div class="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 shadow-sm mt-8 text-left">
+                            <h3 class="font-bold text-slate-800 text-xl mb-4">Serviços Clínicos</h3>
+                            <p class="mb-4 text-base">A Armazém Drogaria conta com uma estrutura voltada à atenção farmacêutica e aos serviços clínicos, oferecendo:</p>
+                            <ul class="space-y-4 text-base">
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Aferição de pressão arterial</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Teste de glicemia</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Testes rápidos (como dengue e COVID-19)</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Perfuração de lóbulo</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Orientação farmacêutica individualizada</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-brand-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Aplicação de medicamentos por via intramuscular (IM) e intravenosa (EV)</span>
+                                </li>
+                            </ul>
                         </div>
-                        <div>
-                            <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold">Endereço</p>
-                            <p class="text-lg text-white">Av. Governador Valadares, 1465</p>
-                            <p class="text-lg text-white">Centro</p>
-                            <p class="text-lg text-white">Nova Ponte - MG</p>
-                            <p class="text-lg text-white">CEP: 38.160-000</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
-                            <div>
-                                <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold">Telefone / WhatsApp</p>
-                                <a href="https://wa.me/553433562100" class="text-xl font-bold text-green-400 hover:text-green-300 transition-colors">
-                                    (34) 3356-2100
-                                </a>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold">E-mail</p>
-                                <a href="mailto:ORGCONTABILALTERNATIVA@GMAIL.COM" class="text-sm md:text-base text-blue-400 hover:text-blue-300 transition-colors break-words">
-                                    ORGCONTABILALTERNATIVA@GMAIL.COM
-                                </a>
-                            </div>
+                        
+                        <p>
+                            Os procedimentos são realizados por profissional habilitado, garantindo cuidado e segurança sanitária. Nosso atendimento em farmácia clínica é um dos grandes diferenciais. Contamos com os farmacêuticos clínicos <strong>Amanda e Lindomar</strong>, reconhecidos na cidade e região pela excelência técnica.
+                        </p>
+                    </div>
+
+                    <div class="pt-10 border-t border-slate-100 text-left">
+                        <h3 class="text-2xl font-bold text-brand-dark mb-4 flex items-center gap-3">
+                            <span class="text-3xl">🚗</span> Estrutura e Diferenciais
+                        </h3>
+                        <div class="text-lg text-slate-600 leading-relaxed space-y-6">
+                            <p class="text-justify">
+                                A Armazém Drogaria é a única da cidade com <strong>estacionamento privativo gratuito</strong>, proporcionando mais conforto, segurança e praticidade aos clientes. Estamos localizados em ponto estratégico, ao lado de supermercado e lotérica, facilitando o acesso da população.
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 h-[400px] lg:h-auto min-h-[400px]">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.696160538965!2d-47.68415752538183!3d-19.120977413620953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94bac5b62b080fb9%3A0xc3f8e58f00db10ea!2sAv.%20Gov.%20Valadares%2C%201465%20-%20Centro%2C%20Nova%20Ponte%20-%20MG%2C%2038160-000!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+            <div class="mt-16 bg-slate-900 text-slate-300 p-8 md:p-10 rounded-3xl text-sm md:text-base leading-relaxed w-full shadow-2xl max-w-5xl mx-auto fade-in-up text-center">
+                <p>
+                    Somos um estabelecimento farmacêutico devidamente constituído e em funcionamento regular, situado na Avenida Governador Valadares, nº 1465, Centro, Nova Ponte – Minas Gerais, atuando no comércio varejista de medicamentos e produtos para saúde, higiene e bem-estar, em conformidade com as exigências legais e sanitárias aplicáveis.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="servicos" class="py-24 bg-slate-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl font-extrabold text-brand-dark">
+                    Nossos Diferenciais
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition border border-slate-100 fade-in-up">
+                    <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-brand-red mb-8">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">
+                        Atendimento Humanizado
+                    </h3>
+                    <p class="text-slate-500">
+                        Nossa equipe está preparada para cuidar da sua saúde com empatia, 
+                        respeito e dedicação, garantindo o melhor acolhimento.
+                    </p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition border border-slate-100 fade-in-up delay-100">
+                    <div class="w-16 h-16 bg-cyan-50 rounded-2xl flex items-center justify-center text-brand-cyan mb-8">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">
+                        Produtos Farmacêuticos
+                    </h3>
+                    <p class="text-slate-500">
+                        Ampla variedade de medicamentos, genéricos e produtos de saúde com
+                        procedência garantida.
+                    </p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition border border-slate-100 fade-in-up delay-200">
+                    <div
+                        class="w-16 h-16 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-500 mb-8">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">
+                        Perfumaria e Higiene
+                    </h3>
+                    <p class="text-slate-500">
+                        Linha completa de cuidados pessoais, dermocosméticos e linha
+                        infantil.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-950 text-gray-400 py-10 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div class="text-center md:text-left">
-                <p class="font-bold text-white text-lg">MARIANA CARDOSO DIAS LTDA</p>
-                <p class="text-sm">CNPJ: 17.091.175/0001-54</p>
-                <p class="text-sm mt-2">© <span id="ano-atual"></span> Armazém Drogaria. Todos os direitos reservados.</p>
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center text-brand-dark mb-16 fade-in-up">
+                Nossas Instalações
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden shadow-lg fade-in-up h-72">
+                    <img src="img/1.jpeg" class="w-full h-full object-cover hover:scale-110 transition duration-700" alt="Instalação 1" />
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg fade-in-up h-72">
+                    <img src="img/2.jpeg" class="w-full h-full object-cover hover:scale-110 transition duration-700" alt="Instalação 2" />
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg fade-in-up h-72">
+                    <img src="img/3.jpeg" class="w-full h-full object-cover hover:scale-110 transition duration-700" alt="Instalação 3" />
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg fade-in-up h-72">
+                    <img src="img/4.jpeg" class="w-full h-full object-cover hover:scale-110 transition duration-700" alt="Instalação 4" />
             </div>
-            
-            <div>
-                <button id="open-modal" class="text-sm hover:text-white transition-colors underline underline-offset-4">
+        </div>
+    </section>
+
+<section id="contato" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="text-center mb-12 fade-in-up">
+                <h2 class="text-4xl font-extrabold mb-4">Localização e Contato</h2>
+                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                    <span class="px-6 py-3 rounded-full font-bold bg-brand-cyan text-white shadow-glow transform scale-105 ring-2 ring-brand-cyan ring-offset-2 ring-offset-slate-900 cursor-default">
+                        Nova Ponte
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-left">
+                    <div class="space-y-8">
+                        <div id="info-unidade1" class="block">
+                            <h3 class="text-2xl font-bold text-brand-cyan mb-2">
+                                Nova Ponte
+                            </h3>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest mb-6">
+                                MARIANA CARDOSO DIAS LTDA
+                            </p>
+                            <div class="space-y-4">
+                                <p class="text-slate-300">
+                                    <strong>Endereço:</strong><br />AV GOVERNADOR VALADARES, 1465, CENTRO<br />NOVA PONTE - MG, 38.160-000
+                                </p>
+                                <p class="text-slate-300">
+                                    <strong>CNPJ:</strong> 17.091.175/0001-54
+                                </p>
+                                <p class="text-slate-300">
+                                    <strong>Email:</strong> orgcontabilalternativa@gmail.com
+                                </p>
+                                <p class="text-slate-300">
+                                    <strong>Telefone:</strong> (34) 3356-2100
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="h-[400px] w-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-700 fade-in-right">
+                    <iframe id="map-iframe"
+                        src="https://maps.google.com/maps?q=Avenida+Governador+Valadares,+1465,+Centro,+Nova+Ponte+-+MG&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-white font-bold text-xl mb-1">
+                    Armazém Drogaria
+                </p>
+            </div>
+
+            <div class="flex gap-6">
+                <button id="open-privacy" class="hover:text-brand-cyan transition text-sm underline underline-offset-4">
                     Política de Privacidade
                 </button>
             </div>
+
+            <div class="text-sm">© 2026. Todos os direitos reservados.</div>
         </div>
     </footer>
+    
+    <div id="privacy-modal"
+        class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300"
+        aria-hidden="true">
+        <div
+            class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative transform scale-95 transition-transform duration-300 border border-slate-100">
+            <div
+                class="bg-gradient-to-r from-brand-red to-brand-red/90 p-6 sm:p-8 text-white rounded-t-3xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
 
-    <div id="modal-privacidade" class="fixed inset-0 z-[100] hidden items-center justify-center">
-        <div id="modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
-        
-        <div class="relative bg-white rounded-2xl shadow-2xl w-11/12 md:w-2/3 lg:w-1/2 max-h-[80vh] flex flex-col transform transition-all">
-            <div class="flex justify-between items-center p-6 border-b border-gray-100">
-                <h3 class="text-2xl font-bold text-secondary">Política de Privacidade</h3>
-                <button id="close-modal" class="text-gray-400 hover:text-primary transition-colors focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button id="close-modal"
+                    class="absolute top-4 right-4 bg-white/20 hover:bg-white/30 p-2 rounded-full transition text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
+
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                    Sua privacidade em 1º lugar
+                </h2>
+                <p class="text-red-100 mt-2 text-sm sm:text-base font-medium">
+                    Transparência total sobre como funcionamos.
+                </p>
             </div>
-            
-            <div class="p-6 overflow-y-auto text-gray-600 space-y-4">
-                <p>A <strong>Armazém Drogaria</strong> valoriza a sua privacidade e garante o sigilo total das informações que você nos fornece. Esta política de privacidade genérica explica como lidamos com seus dados.</p>
-                
-                <h4 class="font-bold text-gray-800 mt-4">1. Coleta de Dados</h4>
-                <p>Nosso site institucional não coleta dados pessoais automaticamente, a menos que você entre em contato voluntariamente através de nossos canais de atendimento (WhatsApp ou E-mail).</p>
-                
-                <h4 class="font-bold text-gray-800 mt-4">2. Uso das Informações</h4>
-                <p>Qualquer informação fornecida durante o contato direto será utilizada exclusivamente para responder às suas solicitações e prestar o melhor atendimento clínico e farmacêutico.</p>
-                
-                <h4 class="font-bold text-gray-800 mt-4">3. Compartilhamento</h4>
-                <p>Nós não vendemos, alugamos ou transferimos seus dados para terceiros em nenhuma hipótese.</p>
-                
-                <h4 class="font-bold text-gray-800 mt-4">4. Cookies</h4>
-                <p>Este site pode utilizar cookies básicos de funcionamento para melhorar sua experiência de navegação, sem rastrear informações individualizadas para fins publicitários.</p>
+
+            <div class="p-6 sm:p-8 space-y-8">
+                <div class="flex gap-4">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">
+                            Navegação 100% Anônima
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                            Este site é uma vitrine institucional. Nós
+                            <strong>não instalamos cookies</strong>, não rastreamos sua
+                            localização e não salvamos seu IP.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center text-green-500">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">E os pedidos?</h3>
+                        <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                            Ao clicar em "Contato", você é levado para o
+                            <strong>WhatsApp</strong>. A partir dali, a conversa é
+                            criptografada de ponta a ponta pela Meta. Nós só teremos acesso
+                            aos dados que você fornecer voluntariamente no chat (como
+                            receita médica ou endereço) para realizar a entrega.
+                        </p>
+                    </div>
+                </div>
             </div>
-            
-            <div class="p-4 border-t border-gray-100 flex justify-end bg-gray-50 rounded-b-2xl">
-                <button id="close-modal-btn" class="px-6 py-2 bg-secondary text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors">
-                    Entendi
+
+            <div class="p-6 sm:p-8 pt-0">
+                <button id="close-modal-btn"
+                    class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Entendi</span>
                 </button>
+                <p class="text-center text-xs text-slate-400 mt-4">
+                    Última atualização: Janeiro de 2026
+                </p>
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
+
 </html>
+```
